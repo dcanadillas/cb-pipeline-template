@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "This is the build stage"
                 container('maven') {
-                    sh 'mvn ${maven_steps}'
+                    sh 'mvn "${maven_steps}"'
                 }
             }
         }
