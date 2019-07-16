@@ -13,7 +13,7 @@ parameters:
   - name: github_creds
     displayName: GitHub Credentials ID
     type: credentials
-    defaultValue: github-token
+    defaultValue: github-dcanadillas
   - name: maven_steps
     displayName: Maven steps to execute
     type: string
