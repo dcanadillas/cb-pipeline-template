@@ -1,0 +1,38 @@
+pipeline {
+    agent {
+        kubernetes {
+            label 'docker-build-pod'
+            yamlFile 'podTemplate.yaml'
+        }
+    }
+    stages {
+        stage('Checkout'){
+            steps {
+                git credentialsId: ${github_creds}, url: ${github_repo}
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "This is the build stage"
+                container('maven') {
+                    sh 'mvn ${maven_steps}'
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    return deploy
+                }
+            }
+            steps {
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    echo "building artifact"
+                    sh """#!/busybox/sh
+                        /kaniko/executor --context `pwd` --destination eu.gcr.io/emea-sa-demo/petclinic-kaniko:latest --cache=true
+                    """
+                }
+            }
+        }
+    }
+}
