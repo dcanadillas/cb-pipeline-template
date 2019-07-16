@@ -1,7 +1,7 @@
 version: 1
 type: pipeline-template
 
-name: Java Maven App Pipeline Job
+name: Petclinic Application example
 description: Simple Java App With Maven
 templateType: MULTIBRANCH
 parameters:
