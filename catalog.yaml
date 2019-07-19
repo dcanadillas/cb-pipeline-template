@@ -1,5 +1,5 @@
 version: 1
 type: pipeline-template-catalog
 
-name: emiratesTemplateEnvironment
+name: DemoTemplateEnvironment
 displayName: Pipeline Template to Demo to Emirates
